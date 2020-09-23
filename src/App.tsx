@@ -1,8 +1,20 @@
 import React, { useState } from "react";
 import "./styles.css";
 
-function Todo({ todo }) {
-  return <div className="todo">{todo.text}</div>;
+//type Todo = {text: string, isCompleted: boolean}
+
+function Todo({ todo, index, completeTodo }) {
+  return (
+    <div
+      className="todo"
+      style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}
+    >
+      {todo.text}
+      <div>
+        <button onClick={() => completeTodo(index)}>Complete</button>
+      </div>
+    </div>
+  );
 }
 
 function TodoForm({ addTodo }) {
@@ -22,7 +34,8 @@ function TodoForm({ addTodo }) {
         className="input"
         value={value}
         onChange={(e) => setValue(e.target.value)}
-      />
+      />{" "}
+      Enter todo
     </form>
   );
 }
@@ -35,11 +48,22 @@ function App() {
     setTodos(newTodos);
   };
 
+  const completeTodo = (index) => {
+    const newTodos = [...todos];
+    newTodos[index].isCompleted = true;
+    setTodos(newTodos);
+  };
+
   return (
     <div className="app">
       <div className="todo-list">
         {todos.map((todo, index) => (
-          <Todo key={index} index={index} todo={todo} />
+          <Todo
+            key={index}
+            index={index}
+            todo={todo}
+            completeTodo={completeTodo}
+          />
         ))}
         <TodoForm addTodo={addTodo} />
       </div>
