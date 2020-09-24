@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./styles.css";
 
-type TodoListProps = {
+type ListProps = {
   todo: {
     text: string;
     isCompleted: boolean;
@@ -16,7 +16,7 @@ type FormProps = {
   addTodo: (value: string) => void;
 };
 
-function Todo({ todo, index, completeTodo }: TodoListProps): React.ReactNode {
+function Todo({ todo, index, completeTodo }: ListProps): React.ReactElement {
   return (
     <div
       className="todo"
@@ -30,7 +30,7 @@ function Todo({ todo, index, completeTodo }: TodoListProps): React.ReactNode {
   );
 }
 
-function TodoForm({ addTodo }: FormProps): React.ReactNode {
+function TodoForm({ addTodo }: FormProps): React.ReactElement {
   const [value, setValue] = useState("");
 
   const handleSubmit = (e: React.SyntheticEvent) => {
@@ -48,20 +48,20 @@ function TodoForm({ addTodo }: FormProps): React.ReactNode {
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />{" "}
-      Enter a task
+      Enter a task name
     </form>
   );
 }
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState([] as any);
 
-  const addTodo = (text) => {
+  const addTodo = (text: string) => {
     const newTodos = [...todos, { text }];
     setTodos(newTodos);
   };
 
-  const completeTodo = (index) => {
+  const completeTodo = (index: number) => {
     const newTodos = [...todos];
     newTodos[index].isCompleted = true;
     setTodos(newTodos);
@@ -71,14 +71,16 @@ function App() {
     <div className="app">
       <div className="todo-list">
         <TodoForm addTodo={addTodo} />
-        {todos.map((todo, index) => (
-          <Todo
-            key={index}
-            index={index}
-            todo={todo}
-            completeTodo={completeTodo}
-          />
-        ))}
+        {todos.map(
+          (todo: { text: string; isCompleted: boolean }, index: number) => (
+            <Todo
+              key={index}
+              index={index}
+              todo={todo}
+              completeTodo={completeTodo}
+            />
+          )
+        )}
       </div>
     </div>
   );
