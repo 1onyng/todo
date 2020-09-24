@@ -35,7 +35,10 @@ function TodoForm({ addTodo }: FormProps): React.ReactElement {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    if (!value) return;
+    if (!value.replace(/\s/g, "").length) {
+      alert("Task name cannot be blank. Please try again.");
+      return;
+    }
     addTodo(value);
     setValue("");
   };
