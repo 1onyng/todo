@@ -59,10 +59,12 @@ function TodoForm({ addTodo }: FormProps): React.ReactElement {
 }
 
 function App() {
+  //initialize state to list of todos in localStorage
   const initialTodos = () => JSON.parse(localStorage.getItem("todos") || "[]");
 
   const [todos, setTodos] = useState(initialTodos as any);
-  // debugger
+
+  //persist state into browser whenever state is updated
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
