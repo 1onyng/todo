@@ -7,11 +7,11 @@ type Props = {
     isCompleted: boolean;
   };
   index: number;
-  /** function invoked in the onClick handler*/
-  completeTodo: () => void;
+  /** function invoked when Complete button is clicked*/
+  completeTodo: (index: number) => void;
+  /** function invoked when user submits a task*/
+  addTodo: (value: string) => void;
 };
-
-// type addTodo = {addTodo: () => void};
 
 function Todo({ todo, index, completeTodo }: Props): React.ReactNode {
   return (
@@ -27,7 +27,7 @@ function Todo({ todo, index, completeTodo }: Props): React.ReactNode {
   );
 }
 
-function TodoForm({ addTodo }) {
+function TodoForm({ addTodo }: Props): React.ReactNode {
   const [value, setValue] = useState("");
 
   const handleSubmit = (e: React.SyntheticEvent) => {
