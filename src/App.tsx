@@ -1,9 +1,19 @@
 import React, { useState } from "react";
 import "./styles.css";
 
-//type Todo = {text: string, isCompleted: boolean}
+type Props = {
+  todo: {
+    text: string;
+    isCompleted: boolean;
+  };
+  index: number;
+  /** function invoked in the onClick handler*/
+  completeTodo: () => void;
+};
 
-function Todo({ todo, index, completeTodo }) {
+// type addTodo = {addTodo: () => void};
+
+function Todo({ todo, index, completeTodo }: Props): React.ReactNode {
   return (
     <div
       className="todo"
@@ -20,7 +30,7 @@ function Todo({ todo, index, completeTodo }) {
 function TodoForm({ addTodo }) {
   const [value, setValue] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     if (!value) return;
     addTodo(value);
@@ -35,7 +45,7 @@ function TodoForm({ addTodo }) {
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />{" "}
-      Enter todo
+      Enter a task
     </form>
   );
 }
