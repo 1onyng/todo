@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./styles.css";
 
 type ListProps = {
@@ -59,7 +59,13 @@ function TodoForm({ addTodo }: FormProps): React.ReactElement {
 }
 
 function App() {
-  const [todos, setTodos] = useState([] as any);
+  const initialTodos = () => JSON.parse(localStorage.getItem("todos") || "[]");
+
+  const [todos, setTodos] = useState(initialTodos as any);
+  // debugger
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   const addTodo = (text: string) => {
     const newTodos = [...todos, { text }];
