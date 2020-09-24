@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./styles.css";
 
-type Props = {
+type TodoListProps = {
   todo: {
     text: string;
     isCompleted: boolean;
@@ -9,11 +9,14 @@ type Props = {
   index: number;
   /** function invoked when Complete button is clicked*/
   completeTodo: (index: number) => void;
+};
+
+type FormProps = {
   /** function invoked when user submits a task*/
   addTodo: (value: string) => void;
 };
 
-function Todo({ todo, index, completeTodo }: Props): React.ReactNode {
+function Todo({ todo, index, completeTodo }: TodoListProps): React.ReactNode {
   return (
     <div
       className="todo"
@@ -27,7 +30,7 @@ function Todo({ todo, index, completeTodo }: Props): React.ReactNode {
   );
 }
 
-function TodoForm({ addTodo }: Props): React.ReactNode {
+function TodoForm({ addTodo }: FormProps): React.ReactNode {
   const [value, setValue] = useState("");
 
   const handleSubmit = (e: React.SyntheticEvent) => {
