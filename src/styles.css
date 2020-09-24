@@ -1,5 +1,6 @@
 .app {
-  background: #209cee;
+  background: #9bbcd1;
+  font-family: sans-serif;
   height: 100vh;
   padding: 30px;
 }
@@ -20,5 +21,6 @@
   font-size: 12px;
   justify-content: space-between;
   margin-bottom: 6px;
+  margin-top: 6px;
   padding: 3px 10px;
 }
