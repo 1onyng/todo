@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./styles.css";
 
 type ListProps = {
+  /** standard todo object */
   todo: {
     text: string;
     isCompleted: boolean;
@@ -35,6 +36,7 @@ function TodoForm({ addTodo }: FormProps): React.ReactElement {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    //check for input that only contains whitespace
     if (!value.replace(/\s/g, "").length) {
       alert("Task name cannot be blank. Please try again.");
       return;
