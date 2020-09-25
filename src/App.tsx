@@ -31,7 +31,7 @@ function Todo({ todo, index, completeTodo }: ListProps): React.ReactElement {
   );
 }
 
-function TodoForm({ addTodo }: FormProps): React.ReactElement {
+export function TodoForm({ addTodo }: FormProps): React.ReactElement {
   const [value, setValue] = useState("");
 
   const handleSubmit = (e: React.SyntheticEvent) => {
@@ -64,7 +64,7 @@ function App() {
 
   const [todos, setTodos] = useState(initialTodos as any);
 
-  //persist state into browser whenever state is updated
+  //persist state into browser whenever state is updated.
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);

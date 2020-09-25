@@ -1,21 +1,30 @@
-function filterByTerm(inputArr, searchTerm) {
-  return inputArr.filter(function (arrayElement) {
-    return arrayElement.url.match(searchTerm);
+import React from "react";
+import Enzyme from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import TodoForm from "../src/App";
+
+Enzyme.configure({ adapter: new Adapter() });
+
+describe("<TodoForm />", () => {
+  let wrapper;
+  const setState = jest.fn();
+  const useStateSpy = jest.spyOn(React, "useState");
+  useStateSpy.mockImplementation((init) => [init, setState]);
+
+  beforeEach(() => {
+    wrapper = Enzyme.mount(Enzyme.shallow(<TodoForm />).get(0));
   });
-}
 
-describe("Filter function", () => {
-  test("it should filter by a search term (link)", () => {
-    const input = [
-      { id: 1, url: "https://www.url1.dev" },
-      { id: 2, url: "https://www.url2.dev" },
-      { id: 3, url: "https://www.link3.dev" }
-    ];
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
-    const output = [{ id: 3, url: "https://www.link3.dev" }];
-
-    expect(filterByTerm(input, "link")).toEqual(output);
-
-    expect(filterByTerm(input, "LINK")).toEqual(output); // New test
+  describe("Task input", () => {
+    it("Should capture task correctly onChange", () => {
+      const text = wrapper.find("input").at(0);
+      text.instance().value = "Test";
+      text.simulate("change");
+      expect(setState).toHaveBeenCalledWith("Test");
+    });
   });
 });
