@@ -5,7 +5,7 @@ import TodoForm from "../src/App";
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe("<TodoForm />", () => {
+describe("TodoForm", () => {
   let wrapper;
   const setState = jest.fn();
   const useStateSpy = jest.spyOn(React, "useState");
