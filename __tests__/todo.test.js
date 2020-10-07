@@ -21,7 +21,7 @@ describe("TodoForm", () => {
 
   describe("Task input", () => {
     it("Should capture task correctly onChange", () => {
-      const text = wrapper.find("input").at(0);
+      const text = wrapper.find("input");
       text.instance().value = "Test";
       text.simulate("change");
       expect(setState).toHaveBeenCalledWith("Test");
